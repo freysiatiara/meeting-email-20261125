@@ -23,6 +23,12 @@ def resolve_output_path():
 
 
 def main():
+    if "\n" in LINE:
+        raise ValueError("entry line must be a single line (no newline)")
+    if not LINE.strip():
+        raise ValueError("entry line must not be blank")
+    if len(LINE) > 200:
+        raise ValueError("entry line must be at most 200 characters")
     path = resolve_output_path()
     with open(path, "w", encoding="utf-8") as handle:
         handle.write(LINE)
